@@ -6,7 +6,7 @@ const options = {
 };
 const quill = new Quill("#editor", options);
 
-// 加错操作
-addEventListener("toolbar.bold.tapped", () => {
-  console.log("toolbar.bold.tapped");
+// 加粗操作
+addEventListener("toolbar.boldButtonTapped", () => {
+  console.log("toolbar.bold.tapped!!!");
 });

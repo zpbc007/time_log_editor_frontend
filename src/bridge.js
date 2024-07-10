@@ -87,17 +87,18 @@ function _callNative(message, callback) {
  * native 向前端发过来的消息
  * @param {*} message
  */
-function response(message) {
+function handleMessageFromNative(message) {
+  const messageObj = JSON.parse(message)
   // 需要调用 callback
-  if (message.callbackID) {
-    const callback = responseCallbacks[message.callbackID];
+  if (messageObj.callbackID) {
+    const callback = responseCallbacks[messageObj.callbackID];
     if (callback) {
-      callback(message.data);
+      callback(messageObj.data);
     }
   } else {
-    const handlers = eventListeners[message.eventName];
+    const handlers = eventListeners[messageObj.eventName];
     handlers.forEach((callback) => {
-      callback(message.data);
+      callback(messageObj.data);
     });
   }
 }
@@ -127,7 +128,7 @@ window.timeLineBridge = {
   addEventListener,
   callNative,
   triggerEvent,
-  _response: response,
+  _handleMessageFromNative: handleMessageFromNative,
 };
 
 export { addEventListener, callNative, triggerEvent };
