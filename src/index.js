@@ -1,4 +1,4 @@
-import { addEventListener } from "./bridge";
+import { addEventListener, addEventHandler } from "./bridge";
 
 const options = {
   modules: {
@@ -66,4 +66,19 @@ addEventListener("toolbar.increaseIndentButtonTapped", () => {
 // 减少缩进操作
 addEventListener("toolbar.decreaseIndentButtonTapped", () => {
   handleIndentChange(-1);
+});
+
+// 减少缩进操作
+addEventListener("toolbar.blurButtonTapped", () => {
+  quill.blur();
+});
+
+// 获取编辑器内容
+addEventHandler("editor.fetchContent", () => {
+  return quill.getContents();
+});
+
+// 设置编辑器内容
+addEventListener("editor.setContent", (newContent) => {
+  quill.setContents(newContent, "api");
 });
