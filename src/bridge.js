@@ -16,17 +16,17 @@
 
 /**
  * 使用示例
- * 
+ *
  * 事件监听 无返回值
  * const dispose = window.timeLineBridge.addEventListener("toolbar.bold.tapped", () => {
  *  console.log("toolbar.bold.tapped");
  * });
- * 
+ *
  * 事件监听 有返回值
  * const dispose = window.timeLineBridge.addEventHandler("editor.fetchContent", () => {
  *  return quill.getContents();
  * })
- * 
+ *
  * 主动调用 native api，等待返回结果
  * window.timeLineBridge.call("page.close", {data: true}, (result) => {
  *  if (result) {
@@ -35,7 +35,7 @@
  *    console.log("close failed");
  *  }
  * });
- * 
+ *
  * 主动触发 web 事件，通知客户端
  * window.timeLineBridge.trigger("editor.content.change", { content: "xxx" });
  */
@@ -106,7 +106,9 @@ function _callNative(message, callback) {
     responseCallbacks[callbackID] = callback;
   }
 
-  window.webkit.messageHandlers.timeLineBridge.postMessage(message);
+  window.webkit.messageHandlers.timeLineBridge.postMessage(
+    JSON.stringify(message)
+  );
 }
 
 /**
