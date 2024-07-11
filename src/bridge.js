@@ -129,9 +129,11 @@ function handleMessageFromNative(message) {
     }
   } else {
     const handlers = eventListeners[messageObj.eventName];
-    handlers.forEach((callback) => {
-      callback(messageObj.data);
-    });
+    if (handlers && handlers.length > 0) {
+      handlers.forEach((callback) => {
+        callback(messageObj.data);
+      });
+    }
   }
 }
 
