@@ -171,16 +171,12 @@ function addEventHandler(eventName, handler) {
 function handleEventFromNative(message) {
   const { eventName, data } = JSON.parse(message) || {};
 
-  const response = {
-    eventName,
-    data: null,
-  };
-
   if (eventName && eventHandlers[eventName]) {
-    response.data = eventHandlers[eventName](data || null);
+    const res = eventHandlers[eventName](data || null);
+    return res == null ? null : JSON.stringify(res);
+  } else {
+    return null;
   }
-
-  return response;
 }
 
 // 供外部调用

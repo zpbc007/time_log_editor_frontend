@@ -69,7 +69,7 @@ addEventListener("toolbar.decreaseIndentButtonTapped", () => {
   handleIndentChange(-1);
 });
 
-// 减少缩进操作
+// 清除聚焦状态
 addEventListener("toolbar.blurButtonTapped", () => {
   quill.blur();
 });
@@ -85,14 +85,16 @@ addEventListener("editor.setContent", (newContent) => {
 });
 
 function noticeNativeTextChange(delta) {
-  callNative("editor.textChange", delta);
+  callNative("editor.contentChange", delta);
 }
-const throttledNotice = throttle(noticeNativeTextChange, 300, {
+
+// 5s 内没有改动，再进行同步
+const throttledNotice = throttle(noticeNativeTextChange, 5000, {
   trailing: true,
 });
 
 quill.on("text-change", (delta, oldDelta, source) => {
   if (source == "user") {
-    throttledNotice(delta);
+    throttledNotice(quill.getContents());
   }
 });
