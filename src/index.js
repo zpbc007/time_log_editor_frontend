@@ -81,7 +81,7 @@ addEventHandler("editor.fetchContent", () => {
 
 // 设置编辑器内容
 addEventListener("editor.setContent", (newContent) => {
-  quill.setContents(newContent, "api");
+  quill.setContents(JSON.parse(newContent), "api");
 });
 
 function noticeNativeTextChange(delta) {
