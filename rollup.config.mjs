@@ -1,5 +1,6 @@
 import del from "rollup-plugin-delete";
 import terser from "@rollup/plugin-terser";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 export default {
   input: "src/index.js",
@@ -14,5 +15,5 @@ export default {
       plugins: [terser()],
     },
   ],
-  plugins: [del({ targets: "dist/*" })],
+  plugins: [del({ targets: "dist/*" }), nodeResolve()],
 };

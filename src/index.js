@@ -1,4 +1,5 @@
-import { addEventListener, addEventHandler } from "./bridge";
+import { addEventListener, addEventHandler, callNative } from "./bridge";
+import { throttle } from "lodash-es";
 
 const options = {
   modules: {
@@ -81,4 +82,17 @@ addEventHandler("editor.fetchContent", () => {
 // 设置编辑器内容
 addEventListener("editor.setContent", (newContent) => {
   quill.setContents(newContent, "api");
+});
+
+function noticeNativeTextChange(delta) {
+  callNative("editor.textChange", delta);
+}
+const throttledNotice = throttle(noticeNativeTextChange, 300, {
+  trailing: true,
+});
+
+quill.on("text-change", (delta, oldDelta, source) => {
+  if (source == "user") {
+    throttledNotice(delta);
+  }
 });
