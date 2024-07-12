@@ -5,7 +5,7 @@ const options = {
   modules: {
     toolbar: false,
   },
-  placeholder: "任务备注",
+  placeholder: "备注",
   theme: "snow",
 };
 const quill = new Quill("#editor", options);
