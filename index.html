@@ -18,6 +18,16 @@
       #editor .ql-editor {
         padding: 0;
       }
+      
+      @media (prefers-color-scheme: dark) {
+          body {
+              background-color: #1c1c1e;
+              color: white;
+          }
+          .ql-editor.ql-blank::before {
+            color: #a4a4a5;
+          }
+      }
     </style>
   </head>
   <body>
