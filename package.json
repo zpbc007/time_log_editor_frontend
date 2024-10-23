@@ -17,8 +17,10 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "clean-css": "^5.3.3",
     "local-web-server": "^5.3.3",
     "rollup": "^4.18.1",
+    "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-delete": "^2.0.0"
   }
 }
