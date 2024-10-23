@@ -7,11 +7,11 @@ import CleanCss from "clean-css";
 export default {
   input: "src/index.js",
   output: [
-    {
-      file: "dist/bundle.js",
-      format: "iife",
-      plugins: [],
-    },
+    // {
+    //   file: "dist/bundle.js",
+    //   format: "iife",
+    //   plugins: [],
+    // },
     {
       file: "dist/bundle.min.js",
       format: "iife",
@@ -25,7 +25,7 @@ export default {
       targets: [
         {
           src: "./public/quill.snow.css",
-          dest: "dist/style",
+          dest: "dist",
           transform: (contents) => new CleanCss().minify(contents).styles,
         },
       ],

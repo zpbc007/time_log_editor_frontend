@@ -1,12 +1,18 @@
 import { addEventListener, addEventHandler, callNative } from "./bridge";
 import { throttle } from "lodash-es";
 
+const initialConfig = {
+  readOnly: false,
+  ...(window.tl_editor_config || {}),
+};
+
 const options = {
   modules: {
     toolbar: false,
   },
   placeholder: "备注",
   theme: "snow",
+  readOnly: initialConfig.readOnly,
 };
 const quill = new Quill("#editor", options);
 
@@ -90,7 +96,7 @@ function noticeNativeTextChange(delta) {
 }
 
 // 5s 内没有改动，再进行同步
-const throttledNotice = throttle(noticeNativeTextChange, 5000, {
+const throttledNotice = throttle(noticeNativeTextChange, 300, {
   leading: false,
 });
 
