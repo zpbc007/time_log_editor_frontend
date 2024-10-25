@@ -91,8 +91,11 @@ addEventListener("editor.setContent", (newContent) => {
   quill.setContents(JSON.parse(newContent), "api");
 });
 
-function noticeNativeTextChange(delta) {
-  callNative("editor.contentChange", delta);
+function noticeNativeTextChange(delta, lines) {
+  callNative("editor.contentChange", {
+    content: delta,
+    lines,
+  });
 }
 
 // 5s 内没有改动，再进行同步
@@ -102,6 +105,9 @@ const throttledNotice = throttle(noticeNativeTextChange, 300, {
 
 quill.on("text-change", (delta, oldDelta, source) => {
   if (source == "user") {
-    throttledNotice(quill.getContents());
+    throttledNotice(
+      JSON.stringify(quill.getContents()),
+      quill.getLines().length
+    );
   }
 });
