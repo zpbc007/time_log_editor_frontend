@@ -3,6 +3,7 @@ import { throttle } from "lodash-es";
 
 const initialConfig = {
   readOnly: false,
+  placeholder: "备注",
   ...(window.tl_editor_config || {}),
 };
 
@@ -10,7 +11,7 @@ const options = {
   modules: {
     toolbar: false,
   },
-  placeholder: "备注",
+  placeholder: initialConfig.placeholder,
   theme: "snow",
   readOnly: initialConfig.readOnly,
 };
