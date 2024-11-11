@@ -8,25 +8,29 @@
     <link rel="stylesheet" href="./public/quill.snow.css"/>
     <script src="./src/quill.js" ></script>
     <style>
-      body {
-        margin: 0;
-      }
-      #editor.ql-container.ql-snow {
-        border: none;
-        font-size: 16px;
-      }
-      #editor .ql-editor {
-        padding: 0;
-      }
-      
       @media (prefers-color-scheme: dark) {
           body {
               background-color: #1c1c1e;
               color: white;
           }
-          .ql-editor.ql-blank::before {
-            color: #a4a4a5;
+          #editor .ql-editor.ql-blank::before {
+              color: #a4a4a5;
           }
+      }
+      body {
+          margin: 0;
+          height: 100%;
+          overflow: scroll;
+      }
+      #editor.ql-container.ql-snow {
+          border: none;
+          font-size: 16px;
+      }
+      #editor .ql-editor {
+          padding: 10px;
+      }
+      #editor .ql-editor ol {
+          padding-left: 0;
       }
     </style>
   </head>
@@ -34,6 +38,6 @@
     <div id="info"></div>
     <div id="editor"></div>
 
-    <script src="./dist/bundle.js"></script>
+    <script src="./dist/bundle.min.js"></script>
   </body>
 </html>
